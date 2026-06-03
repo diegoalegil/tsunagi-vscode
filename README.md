@@ -18,7 +18,7 @@ without leaving the editor.
 
 | Setting | Description |
 |---------|-------------|
-| `tsunagi.version` | Version inserted into `pom.xml` (default `0.1.0`). |
+| `tsunagi.version` | Version inserted into `pom.xml` (default `1.0.0`). |
 | `tsunagi.tmdbToken` | Optional TMDb token used in generated snippets/examples. |
 
 ## Requirements
