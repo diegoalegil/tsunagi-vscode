@@ -1,0 +1,72 @@
+{
+  "name": "tsunagi-vscode",
+  "displayName": "Tsunagi",
+  "description": "Helper for the Tsunagi anime data SDK: insert the Maven dependency, snippets, and search anime from the editor.",
+  "version": "0.1.0",
+  "publisher": "diegoalegil",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "keywords": [
+    "anime",
+    "maven",
+    "anilist",
+    "tsunagi",
+    "java"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diegoalegil/tsunagi-vscode.git"
+  },
+  "main": "./out/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "tsunagi.insertDependency",
+        "title": "Tsunagi: Insert Maven Dependency"
+      },
+      {
+        "command": "tsunagi.searchAnime",
+        "title": "Tsunagi: Search Anime"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "java",
+        "path": "./snippets/java.json"
+      }
+    ],
+    "configuration": {
+      "title": "Tsunagi",
+      "properties": {
+        "tsunagi.tmdbToken": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Optional TMDb Bearer token used by the generated `TsunagiConfig` snippet and examples."
+        },
+        "tsunagi.version": {
+          "type": "string",
+          "default": "0.1.0",
+          "description": "Version of the Tsunagi dependency inserted into pom.xml."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.5"
+  }
+}
