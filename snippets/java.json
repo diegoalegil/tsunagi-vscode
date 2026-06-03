@@ -1,0 +1,37 @@
+{
+  "Tsunagi client setup": {
+    "prefix": "tsunagi-client",
+    "body": [
+      "TsunagiConfig config = TsunagiConfig.builder()",
+      "        .tmdbToken(System.getenv(\"TMDB_TOKEN\"))",
+      "        .cacheEnabled(true)",
+      "        .build();",
+      "",
+      "TsunagiClient tsunagi = new TsunagiClient(config);",
+      "",
+      "Optional<Anime> ${1:anime} = tsunagi.searchAnime(\"${2:Cowboy Bebop}\");",
+      "${1:anime}.ifPresent(a -> System.out.println(a.title()));"
+    ],
+    "description": "Create a TsunagiClient and search for an anime"
+  },
+  "Tsunagi config builder": {
+    "prefix": "tsunagi-config",
+    "body": [
+      "TsunagiConfig config = TsunagiConfig.builder()",
+      "        .tmdbToken(System.getenv(\"TMDB_TOKEN\"))",
+      "        .cacheEnabled(${1:true})",
+      "        .cacheTtl(Duration.ofMinutes(${2:10}))",
+      "        .build();"
+    ],
+    "description": "Build a TsunagiConfig"
+  },
+  "Tsunagi import": {
+    "prefix": "tsunagi-imports",
+    "body": [
+      "import io.github.diegoalegil.tsunagi.TsunagiClient;",
+      "import io.github.diegoalegil.tsunagi.TsunagiConfig;",
+      "import io.github.diegoalegil.tsunagi.model.Anime;"
+    ],
+    "description": "Import the main Tsunagi types"
+  }
+}
