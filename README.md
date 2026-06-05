@@ -8,17 +8,30 @@ without leaving the editor.
 
 - **Tsunagi: Insert Maven Dependency** — finds your `pom.xml` (asking which one if
   there are several), checks Tsunagi isn't already there, and inserts the
-  `<dependency>` into `<dependencies>` (creating the block if needed).
-- **Tsunagi: Search Anime** — search AniList straight from the command palette and
-  open the cover image; a quick way to check a title while coding.
-- **Snippets** — type `tsunagi-client`, `tsunagi-config` or `tsunagi-imports` in a
-  Java file to scaffold the usual setup.
+  `<dependency>` into `<dependencies>` (creating the block if needed). The version
+  comes from the `tsunagi.version` setting (default `1.3.0`).
+- **Tsunagi: Search Anime** — search AniList straight from the command palette,
+  see the romaji/native title, year and score, and open the cover image; a quick
+  way to check a title while coding.
+- **Snippets** — type a `tsunagi-` prefix in a Java file to scaffold common code,
+  from the unified facade to the rich per-source clients (see below).
+
+## Snippets
+
+| Prefix | Scaffolds |
+|--------|-----------|
+| `tsunagi-imports` | The core imports (`TsunagiClient`, `TsunagiConfig`, `Anime`). |
+| `tsunagi-client` | A `TsunagiClient` plus a `searchAnime` call. |
+| `tsunagi-config` | A `TsunagiConfig.builder()` chain (token, User-Agent, cache). |
+| `tsunagi-anilist-popular` | `AniListClient.fetchPopular(...)` over the rich `AniListMedia` records *(1.1.0+)*. |
+| `tsunagi-tmdb` | `TmdbClient.searchMulti(...)` over TV **and** movies with the `display*()`/`isTv()`/`isMovie()` helpers *(1.2.0+)*. |
+| `tsunagi-source-advanced` | An `AniListClient` with User-Agent, `RetryPolicy` and `TokenBucketRateLimiter` *(1.1.0+)*. |
 
 ## Settings
 
 | Setting | Description |
 |---------|-------------|
-| `tsunagi.version` | Version inserted into `pom.xml` (default `1.0.0`). |
+| `tsunagi.version` | Version inserted into `pom.xml` (default `1.3.0`). |
 | `tsunagi.tmdbToken` | Optional TMDb token used in generated snippets/examples. |
 
 ## Requirements

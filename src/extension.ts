@@ -30,7 +30,7 @@ async function insertDependency(): Promise<void> {
         return;
     }
 
-    const version = vscode.workspace.getConfiguration('tsunagi').get<string>('version', '0.1.0');
+    const version = vscode.workspace.getConfiguration('tsunagi').get<string>('version', '1.3.0');
     const edit = new vscode.WorkspaceEdit();
     const dependency =
         `        <dependency>\n` +
@@ -134,12 +134,13 @@ async function searchAnime(): Promise<void> {
                 }
 
                 const name = media.title.romaji ?? media.title.english ?? media.title.native ?? title;
+                const native = media.title.native && media.title.native !== name ? ` / ${media.title.native}` : '';
                 const year = media.startDate.year ?? 'unknown year';
                 const score = media.averageScore !== undefined ? `${media.averageScore}/100` : 'no score';
                 const image = media.coverImage.large;
 
                 const action = await vscode.window.showInformationMessage(
-                    `${name} (${year}) — ${score}`,
+                    `${name}${native} (${year}) — ${score}`,
                     ...(image ? ['Open cover image'] : []),
                 );
                 if (action && image) {
