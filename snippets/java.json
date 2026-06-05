@@ -19,8 +19,9 @@
     "body": [
       "TsunagiConfig config = TsunagiConfig.builder()",
       "        .tmdbToken(System.getenv(\"TMDB_TOKEN\"))",
-      "        .cacheEnabled(${1:true})",
-      "        .cacheTtl(Duration.ofMinutes(${2:10}))",
+      "        .userAgent(\"${1:MyApp}/1.0 (+https://example.com)\")",
+      "        .cacheEnabled(${2:true})",
+      "        .cacheTtl(Duration.ofMinutes(${3:10}))",
       "        .build();"
     ],
     "description": "Build a TsunagiConfig"
@@ -33,5 +34,40 @@
       "import io.github.diegoalegil.tsunagi.model.Anime;"
     ],
     "description": "Import the main Tsunagi types"
+  },
+  "Tsunagi AniList popular feed": {
+    "prefix": "tsunagi-anilist-popular",
+    "body": [
+      "AniListClient anilist = new AniListClient();",
+      "List<AniListMedia> ${1:popular} = anilist.fetchPopular(${2:50});",
+      "for (AniListMedia m : ${1:popular}) {",
+      "    System.out.println(m.title().romaji() + \" (\" + m.seasonYear() + \") — \" + m.averageScore());",
+      "}"
+    ],
+    "description": "Fetch the most popular anime as rich AniListMedia records (1.1.0+)"
+  },
+  "Tsunagi TMDb multi-search": {
+    "prefix": "tsunagi-tmdb",
+    "body": [
+      "TmdbClient tmdb = new TmdbClient(System.getenv(\"TMDB_TOKEN\"));",
+      "TmdbSearchResponse ${1:res} = tmdb.searchMulti(\"${2:Suzume}\", \"${3:es-ES}\");",
+      "for (TmdbSearchResult r : ${1:res}.results()) {",
+      "    if (r.isTv() || r.isMovie()) {            // /search/multi also returns people",
+      "        System.out.println(r.displayName() + \" — \" + r.displayDate());",
+      "    }",
+      "}"
+    ],
+    "description": "Search TMDb for TV + movies with /search/multi (1.2.0+)"
+  },
+  "Tsunagi AniList client (retry + rate limit)": {
+    "prefix": "tsunagi-source-advanced",
+    "body": [
+      "AniListClient ${1:anilist} = new AniListClient(",
+      "        Duration.ofSeconds(30),",
+      "        \"${2:MyApp}/1.0 (+https://example.com)\",                  // User-Agent (opt-in; needs -Djdk.httpclient.allowRestrictedHeaders=user-agent)",
+      "        RetryPolicy.exponentialBackoff(${3:3}, Duration.ofMillis(${4:500})),",
+      "        new TokenBucketRateLimiter(${5:3}, Duration.ofSeconds(1)));"
+    ],
+    "description": "Build an AniList client with User-Agent, retries and rate limiting (1.1.0+). JikanClient also takes an optional RetryPolicy since 1.3.0."
   }
 }

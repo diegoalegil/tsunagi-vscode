@@ -1,8 +1,8 @@
 {
   "name": "tsunagi-vscode",
   "displayName": "Tsunagi",
-  "description": "Helper for the Tsunagi anime data SDK: insert the Maven dependency, snippets, and search anime from the editor.",
-  "version": "0.1.0",
+  "description": "Helper for the Tsunagi anime data SDK: insert the Maven dependency, snippets for AniList/TMDb/Jikan, and search anime from the editor.",
+  "version": "0.2.0",
   "publisher": "diegoalegil",
   "license": "MIT",
   "engines": {
@@ -16,6 +16,8 @@
     "anime",
     "maven",
     "anilist",
+    "tmdb",
+    "jikan",
     "tsunagi",
     "java"
   ],
@@ -52,7 +54,7 @@
         },
         "tsunagi.version": {
           "type": "string",
-          "default": "1.0.0",
+          "default": "1.3.0",
           "description": "Version of the Tsunagi dependency inserted into pom.xml."
         }
       }
